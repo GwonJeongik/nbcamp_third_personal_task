@@ -11,4 +11,9 @@ public class UpdateCommentDto {
 
     @NotBlank
     private String author;
+
+    public UpdateCommentDto(String content, String author) {
+        this.content = content;
+        this.author = author;
+    }
 }

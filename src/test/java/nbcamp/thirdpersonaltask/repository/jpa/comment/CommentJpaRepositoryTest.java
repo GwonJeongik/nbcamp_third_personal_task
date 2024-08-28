@@ -4,20 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import nbcamp.thirdpersonaltask.domain.Comment;
 import nbcamp.thirdpersonaltask.domain.Schedule;
 import nbcamp.thirdpersonaltask.repository.jpa.schedule.ScheduleRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @Transactional
-@Commit
 @SpringBootTest
 class CommentJpaRepositoryTest {
 
@@ -53,6 +49,19 @@ class CommentJpaRepositoryTest {
 
     @Test
     void update() {
+        //given
+        Comment comment = new Comment("잘 먹었습니다!", "맹구", schedule);
+        commentRepository.save(comment);
+
+        UpdateCommentDto updateParam = new UpdateCommentDto("안 먹어!!", "짱구");
+
+        //when
+        commentRepository.update(comment.getId(), updateParam);
+
+        //then
+        Comment findComment = commentRepository.findById(comment.getId()).get();
+        assertThat(findComment.getContent()).isEqualTo(updateParam.getContent());
+        assertThat(findComment.getAuthor()).isEqualTo(updateParam.getAuthor());
     }
 
     @Test
