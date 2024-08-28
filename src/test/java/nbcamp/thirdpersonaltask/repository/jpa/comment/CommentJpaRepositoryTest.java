@@ -8,12 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @Transactional
@@ -39,7 +40,7 @@ class CommentJpaRepositoryTest {
     @Test
     void save() {
         //given
-        Comment comment = new Comment("잘 먹었습니다!", "맹구", schedule);
+        Comment comment = new Comment("덜 먹었습니다!", "맹구", schedule);
 
         //when
         Comment saveComment = commentRepository.save(comment);
@@ -53,7 +54,7 @@ class CommentJpaRepositoryTest {
     @Test
     void update() {
         //given
-        Comment comment = new Comment("잘 먹었습니다!", "맹구", schedule);
+        Comment comment = new Comment("잘 먹겠습니다!", "맹구", schedule);
         commentRepository.save(comment);
 
         UpdateCommentDto updateParam = new UpdateCommentDto("안 먹어!!", "짱구");
@@ -87,5 +88,15 @@ class CommentJpaRepositoryTest {
 
     @Test
     void delete() {
+        //given
+        Comment comment = new Comment("먹어보겠습니다!!!", "유리", schedule);
+        commentRepository.save(comment);
+
+        //when
+        commentRepository.delete(comment.getId());
+
+        //then
+        assertThatThrownBy(() -> commentRepository.findById(comment.getId()).get())
+                .isInstanceOf(NoSuchElementException.class);
     }
 }
