@@ -1,8 +1,8 @@
 package nbcamp.thirdpersonaltask.service;
 
 import nbcamp.thirdpersonaltask.domain.Schedule;
-import nbcamp.thirdpersonaltask.repository.FindScheduleCondition;
-import nbcamp.thirdpersonaltask.repository.UpdateScheduleDto;
+import nbcamp.thirdpersonaltask.repository.jpa.schedule.FindScheduleCondition;
+import nbcamp.thirdpersonaltask.repository.jpa.schedule.UpdateScheduleDto;
 
 import java.util.List;
 import java.util.Optional;

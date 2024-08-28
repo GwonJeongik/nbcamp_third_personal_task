@@ -7,45 +7,43 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * 레벨 2 추가사항
+ */
 @Data
 @Entity
-@Table(name = "test_schedule")
+@Table(name = "test_comment")
 @NoArgsConstructor
-public class Schedule {
+public class Comment {
 
     @Id
-    @Column(name = "schedule_id")
+    @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String name;
+    private String content;
 
     @NotBlank
-    private String taskTitle;
-
-    @NotBlank
-    private String task;
-    private String saveDate;
+    private String author;
+    private String createDate;
     private String updateDate;
 
-    //레벨 2 추가 사항
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
 
-    public Schedule(String name, String taskTitle, String task) {
-        this.name = name;
-        this.taskTitle = taskTitle;
-        this.task = task;
+    public Comment(String content, String author, Schedule schedule) {
+        this.content = content;
+        this.author = author;
+        this.schedule = schedule;
     }
 
     @PrePersist
     public void prePersist() {
         String currentDateTime = getCurrentDateTime();
-        this.saveDate = currentDateTime;
+        this.createDate = currentDateTime;
         this.updateDate = currentDateTime;
     }
 

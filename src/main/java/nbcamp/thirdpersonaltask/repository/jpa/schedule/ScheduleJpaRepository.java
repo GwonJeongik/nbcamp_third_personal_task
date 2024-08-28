@@ -1,13 +1,10 @@
-package nbcamp.thirdpersonaltask.repository.jpa;
+package nbcamp.thirdpersonaltask.repository.jpa.schedule;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nbcamp.thirdpersonaltask.domain.Schedule;
-import nbcamp.thirdpersonaltask.repository.FindScheduleCondition;
-import nbcamp.thirdpersonaltask.repository.ScheduleRepository;
-import nbcamp.thirdpersonaltask.repository.UpdateScheduleDto;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 

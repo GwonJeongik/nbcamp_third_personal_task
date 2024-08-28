@@ -1,4 +1,4 @@
-package nbcamp.thirdpersonaltask.repository;
+package nbcamp.thirdpersonaltask.repository.jpa.schedule;
 
 import lombok.Data;
 

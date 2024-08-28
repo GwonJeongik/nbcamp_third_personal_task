@@ -1,8 +1,7 @@
-package nbcamp.thirdpersonaltask.repository.jpa;
+package nbcamp.thirdpersonaltask.repository.jpa.schedule;
 
 import lombok.extern.slf4j.Slf4j;
 import nbcamp.thirdpersonaltask.domain.Schedule;
-import nbcamp.thirdpersonaltask.repository.UpdateScheduleDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

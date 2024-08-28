@@ -3,8 +3,8 @@ package nbcamp.thirdpersonaltask.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nbcamp.thirdpersonaltask.domain.Schedule;
-import nbcamp.thirdpersonaltask.repository.FindScheduleCondition;
-import nbcamp.thirdpersonaltask.repository.UpdateScheduleDto;
+import nbcamp.thirdpersonaltask.repository.jpa.schedule.FindScheduleCondition;
+import nbcamp.thirdpersonaltask.repository.jpa.schedule.UpdateScheduleDto;
 import nbcamp.thirdpersonaltask.web.controller.ScheduleController;
 import org.springframework.stereotype.Service;
 
