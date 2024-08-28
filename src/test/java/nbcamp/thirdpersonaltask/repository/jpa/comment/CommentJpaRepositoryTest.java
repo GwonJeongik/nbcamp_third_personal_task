@@ -8,7 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,6 +69,20 @@ class CommentJpaRepositoryTest {
 
     @Test
     void findAll() {
+        //given
+        Comment comment1 = new Comment("잘 먹었습니다1", "맹구1", schedule);
+        Comment comment2 = new Comment("잘 먹었습니다2", "맹구2", schedule);
+        Comment comment3 = new Comment("잘 먹었습니다3", "맹구3", schedule);
+        commentRepository.save(comment1);
+        commentRepository.save(comment2);
+        commentRepository.save(comment3);
+
+        //when
+        List<Comment> findAllComment = commentRepository.findAll();
+        log.info("findAllComment={}", findAllComment);
+
+        //then
+        assertThat(findAllComment).size().isEqualTo(3);
     }
 
     @Test
